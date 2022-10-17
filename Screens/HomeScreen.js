@@ -24,13 +24,12 @@ const HomeScreen = () => {
 	}, []);
 
 	return (
-		<SafeAreaView className="bg-white">
+		<SafeAreaView className="bg-white flex-1">
 			<FlatList
-				className="bg-white"
 				data={products}
 				renderItem={({ item }) => (
 					<TouchableOpacity
-						className="py-10 w-full border-b border-b-gray-100 bg-white"
+						className="py-8 border-b border-b-gray-100"
 						onPress={() => {
 							navigation.navigate("DetailsScreen", { productId: item._id });
 						}}

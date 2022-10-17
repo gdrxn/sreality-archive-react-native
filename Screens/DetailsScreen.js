@@ -20,7 +20,7 @@ const DetailsScreen = () => {
 				setDetails(data.result);
 			})
 			.catch((err) => {
-				console.log(1, err);
+				console.log(err);
 			});
 	}, []);
 

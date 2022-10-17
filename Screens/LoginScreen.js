@@ -5,17 +5,18 @@ import {
 	TouchableOpacity,
 	SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import { setUser } from "../Stores/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginScreen = () => {
-	const navigation = useNavigation();
+	const dispatch = useDispatch();
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	function login() {
-		console.log(email, password);
 		axios({
 			method: "post",
 			url: "http://127.0.0.1:3000/api/auth/login",
@@ -29,9 +30,9 @@ const LoginScreen = () => {
 			},
 			withCredentials: true,
 		})
-			.then((data) => {
-				if (data.status == 200) {
-					navigation.navigate("HomeScreen");
+			.then((res) => {
+				if (res.status == 200) {
+					dispatch(setUser(res.data));
 				}
 			})
 			.catch((err) => {
