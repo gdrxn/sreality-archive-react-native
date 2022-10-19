@@ -27,7 +27,7 @@ const FilterModal = ({
 			}}
 		>
 			<SafeAreaView>
-				<View className="flex-row justify-between mt-3">
+				<View className="flex-row justify-between mt-4">
 					<TouchableOpacity
 						onPress={() => {
 							setOriginalValue(sortType);
@@ -46,18 +46,20 @@ const FilterModal = ({
 							updated.current++;
 						}}
 					>
-						<Text className="text-xl mr-4 text-red-400">Save</Text>
+						<Text className="text-xl mr-4">Save</Text>
 					</TouchableOpacity>
 				</View>
-				<Picker
-					selectedValue={originalValue}
-					onValueChange={(itemValue) => setOriginalValue(itemValue)}
-				>
-					<Picker.Item label="Newest" value="date-asc" />
-					<Picker.Item label="Oldest" value="date-desc" />
-					<Picker.Item label="Price Ascending" value="price-asc" />
-					<Picker.Item label="Price Descending" value="price-desc" />
-				</Picker>
+				<View className="w-11/12 self-center mt-7 border-gray-100 shadow-lg border">
+					<Picker
+						selectedValue={originalValue}
+						onValueChange={(itemValue) => setOriginalValue(itemValue)}
+					>
+						<Picker.Item label="Newest" value="date-asc" />
+						<Picker.Item label="Oldest" value="date-desc" />
+						<Picker.Item label="Price Ascending" value="price-asc" />
+						<Picker.Item label="Price Descending" value="price-desc" />
+					</Picker>
+				</View>
 			</SafeAreaView>
 		</Modal>
 	);

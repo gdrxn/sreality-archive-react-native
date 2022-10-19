@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import HomeScreen from "../Screens/HomeScreen";
-import SettingsScreen from "../Screens/SettingsScreen";
+import ProfileScreen from "../Screens/ProfileScreen";
 import FavouritesScreen from "../Screens/FavouritesScreen";
 import { Platform } from "react-native";
 
@@ -13,18 +14,20 @@ export default function HomeStack() {
 		<Tab.Navigator
 			screenOptions={({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
-					let iconName;
-
 					if (route.name === "Home") {
-						iconName = focused ? "home" : "home-outline";
+						const iconName = focused ? "home" : "home-outline";
+						return <Ionicons name={iconName} size={30} />;
 					} else if (route.name === "Favourites") {
-						iconName = focused ? "heart" : "heart-outline";
-					} else if (route.name === "Settings") {
-						iconName = focused ? "settings" : "settings-outline";
+						const iconName = focused ? "heart" : "heart-outline";
+						return <Ionicons name={iconName} size={30} />;
+					} else if (route.name === "Profile") {
+						const iconName = focused
+							? "account-circle"
+							: "account-circle-outline";
+						return <MaterialCommunityIcons name={iconName} size={30} />;
 					}
 
 					// You can return any component that you like here!
-					return <Ionicons name={iconName} size={30} />;
 				},
 				tabBarActiveTintColor: "gray",
 				tabBarInactiveTintColor: "gray",
@@ -35,7 +38,7 @@ export default function HomeStack() {
 		>
 			<Tab.Screen name="Home" component={HomeScreen} />
 			<Tab.Screen name="Favourites" component={FavouritesScreen} />
-			<Tab.Screen name="Settings" component={SettingsScreen} />
+			<Tab.Screen name="Profile" component={ProfileScreen} />
 		</Tab.Navigator>
 	);
 }
