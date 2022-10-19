@@ -11,12 +11,12 @@ const ProfileScreen = () => {
 	return (
 		<SafeAreaView className="flex-1 bg-white">
 			<TouchableOpacity
-				className="mt-4 mr-3 self-end"
+				className="mt-5 mr-5 self-end"
 				onPress={() => {
 					dispatch(unsetUser());
 				}}
 			>
-				<Text className="text-xl">Logout</Text>
+				<Text className="text-lg">Logout</Text>
 			</TouchableOpacity>
 			<View className="items-center mt-10">
 				<MaterialCommunityIcons

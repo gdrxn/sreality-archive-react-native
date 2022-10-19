@@ -64,9 +64,7 @@ const DetailsScreen = () => {
 					{item && `${item.price.toLocaleString()} Kč`}
 				</Text>
 
-				<Text className="px-3.5 mt-2 text-base self-center">
-					{item?.description}
-				</Text>
+				<Text className="px-3.5 mt-2 text-base">{item?.description}</Text>
 
 				<View className="ml-3.5 mt-3 mb-9">
 					{item?.parameters.split(" | ").map((param) => {
