@@ -4,6 +4,7 @@ import {
 	View,
 	TouchableOpacity,
 	SafeAreaView,
+	Platform,
 } from "react-native";
 import { useState } from "react";
 import axios from "axios";
@@ -15,11 +16,15 @@ const LoginScreen = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const host =
+		Platform.OS === "android"
+			? "http://10.0.2.2:3000"
+			: "http://127.0.0.1:3000";
 
 	function login() {
 		axios({
 			method: "post",
-			url: "http://127.0.0.1:3000/api/auth/login",
+			url: `${host}/api/auth/login`,
 			data: {
 				email: email,
 				password: password,

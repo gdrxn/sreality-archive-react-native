@@ -13,6 +13,8 @@ const FilterModal = ({
 	setModalVisible,
 	sortType,
 	setSortType,
+	updated,
+	page,
 }) => {
 	const [originalValue, setOriginalValue] = useState(sortType);
 
@@ -40,6 +42,8 @@ const FilterModal = ({
 							setOriginalValue(originalValue);
 							setSortType(originalValue);
 							setModalVisible(false);
+							page.current = 1;
+							updated.current++;
 						}}
 					>
 						<Text className="text-xl mr-4 text-red-400">Save</Text>

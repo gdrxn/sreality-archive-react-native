@@ -4,6 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import HomeScreen from "../Screens/HomeScreen";
 import SettingsScreen from "../Screens/SettingsScreen";
 import FavouritesScreen from "../Screens/FavouritesScreen";
+import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ export default function HomeStack() {
 				},
 				tabBarActiveTintColor: "gray",
 				tabBarInactiveTintColor: "gray",
-				tabBarStyle: { paddingTop: 8 },
+				tabBarStyle: { paddingTop: Platform.OS === "ios" ? 8 : 0 },
 				headerShown: false,
 				tabBarShowLabel: false,
 			})}

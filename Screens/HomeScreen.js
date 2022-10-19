@@ -8,8 +8,8 @@ import {
 	TouchableOpacity,
 	SafeAreaView,
 	View,
-	Pressable,
 	StatusBar,
+	Platform,
 } from "react-native";
 import axios from "axios";
 
@@ -33,10 +33,14 @@ const HomeScreen = () => {
 
 	function getProducts() {
 		if (products.length === productsLength.current) return;
+		const host =
+			Platform.OS === "android"
+				? "http://10.0.2.2:3000"
+				: "http://127.0.0.1:3000";
 
 		axios({
 			method: "get",
-			url: `http://127.0.0.1:3000/api/user/products?limit=9&page=${page.current}&term=${searchTerm}`,
+			url: `${host}/api/user/products?limit=9&page=${page.current}&term=${searchTerm}&sort=${sortType}`,
 			withCredentials: true,
 		})
 			.then((res) => {
@@ -68,8 +72,10 @@ const HomeScreen = () => {
 				setModalVisible={setModalVisible}
 				sortType={sortType}
 				setSortType={setSortType}
+				updated={updated}
+				page={page}
 			/>
-			<View className="flex-row justify-evenly">
+			<View className="flex-row justify-evenly mt-3">
 				<View className="flex-row items-center justify-between bg-gray-100 rounded-xl border border-gray-200 w-9/12">
 					<View className="flex-row">
 						<View className="pt-0.5 pl-1.5">
@@ -88,7 +94,7 @@ const HomeScreen = () => {
 						/>
 					</View>
 					{searchTerm && (
-						<Pressable
+						<TouchableOpacity
 							className="pr-1.5 "
 							onPress={() => {
 								setSearchTerm("");
@@ -100,17 +106,17 @@ const HomeScreen = () => {
 							}}
 						>
 							<Ionicons name="close-outline" size={24} color="black" />
-						</Pressable>
+						</TouchableOpacity>
 					)}
 				</View>
-				<Pressable
+				<TouchableOpacity
 					className="w-1/12"
 					onPress={() => {
 						setModalVisible(true);
 					}}
 				>
 					<Octicons name="sort-desc" size={28} color="black" />
-				</Pressable>
+				</TouchableOpacity>
 			</View>
 			{isLoading ? (
 				<ActivityIndicator size="large" className="m-auto" color={"#C8C8C8"} />
@@ -122,7 +128,7 @@ const HomeScreen = () => {
 					data={products}
 					renderItem={({ item }) => (
 						<TouchableOpacity
-							className="py-8 border-b border-b-gray-100"
+							className="py-8 border-b border-b-gray-100 px-1.5"
 							onPress={() => {
 								navigation.navigate("Details", item);
 							}}

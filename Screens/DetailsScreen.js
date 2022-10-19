@@ -3,8 +3,8 @@ import {
 	View,
 	Image,
 	ScrollView,
-	Pressable,
 	FlatList,
+	TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
 import { useRoute } from "@react-navigation/native";
@@ -44,7 +44,7 @@ const DetailsScreen = () => {
 							<Image className="w-screen h-72" source={{ uri: image.item }} />
 						)}
 					/>
-					<Pressable
+					<TouchableOpacity
 						className="absolute bottom-2 right-2.5"
 						onPress={() => {
 							toggleLike();
@@ -55,7 +55,7 @@ const DetailsScreen = () => {
 						) : (
 							<Ionicons name="heart-outline" size={35} />
 						)}
-					</Pressable>
+					</TouchableOpacity>
 				</View>
 
 				<Text className="ml-3.5 mt-3 text-lg">{item?.name}</Text>
