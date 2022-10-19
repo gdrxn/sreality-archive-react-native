@@ -9,6 +9,7 @@ import {
 	SafeAreaView,
 	View,
 	Pressable,
+	StatusBar,
 } from "react-native";
 import axios from "axios";
 
@@ -61,23 +62,18 @@ const HomeScreen = () => {
 
 	return (
 		<SafeAreaView className="bg-white flex-1">
+			<StatusBar backgroundColor={"white"} barStyle={"dark-content"} />
 			<FilterModal
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 				sortType={sortType}
 				setSortType={setSortType}
 			/>
-
 			<View className="flex-row justify-evenly">
 				<View className="flex-row items-center justify-between bg-gray-100 rounded-xl border border-gray-200 w-9/12">
 					<View className="flex-row">
 						<View className="pt-0.5 pl-1.5">
-							<Ionicons
-								name="search-outline"
-								className=""
-								size={28}
-								color="black"
-							/>
+							<Ionicons name="search-outline" size={28} color="black" />
 						</View>
 						<TextInput
 							className="pb-1 pl-1 text-base"
@@ -116,13 +112,8 @@ const HomeScreen = () => {
 					<Octicons name="sort-desc" size={28} color="black" />
 				</Pressable>
 			</View>
-
 			{isLoading ? (
-				<ActivityIndicator
-					size="large"
-					className="m-auto
-				"
-				/>
+				<ActivityIndicator size="large" className="m-auto" color={"#C8C8C8"} />
 			) : (
 				<FlatList
 					className="mt-2"

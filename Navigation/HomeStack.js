@@ -23,7 +23,7 @@ export default function HomeStack() {
 					}
 
 					// You can return any component that you like here!
-					return <Ionicons name={iconName} size="30" />;
+					return <Ionicons name={iconName} size={30} />;
 				},
 				tabBarActiveTintColor: "gray",
 				tabBarInactiveTintColor: "gray",

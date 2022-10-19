@@ -41,7 +41,7 @@ const DetailsScreen = () => {
 						horizontal
 						data={item.images}
 						renderItem={(image) => (
-							<Image className="w-screen h-80" source={{ uri: image.item }} />
+							<Image className="w-screen h-72" source={{ uri: image.item }} />
 						)}
 					/>
 					<Pressable
@@ -51,9 +51,9 @@ const DetailsScreen = () => {
 						}}
 					>
 						{isLiked ? (
-							<Ionicons name="heart" size="35" color="red" />
+							<Ionicons name="heart" size={35} color="red" />
 						) : (
-							<Ionicons name="heart-outline" size="35" />
+							<Ionicons name="heart-outline" size={35} />
 						)}
 					</Pressable>
 				</View>
