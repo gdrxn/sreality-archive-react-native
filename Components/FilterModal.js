@@ -49,7 +49,7 @@ const FilterModal = ({
 						<Text className="text-xl mr-4">Save</Text>
 					</TouchableOpacity>
 				</View>
-				<View className="w-11/12 self-center mt-7 border-gray-100 shadow-lg border">
+				<View className="w-11/12 self-center mt-7 border-gray-100 border">
 					<Picker
 						selectedValue={originalValue}
 						onValueChange={(itemValue) => setOriginalValue(itemValue)}
