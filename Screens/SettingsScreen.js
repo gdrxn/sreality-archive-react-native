@@ -13,7 +13,7 @@ const SettingsScreen = () => {
 					dispatch(unsetUser());
 				}}
 			>
-				<Text>Logout</Text>
+				<Text className="text-red-500 text-lg">Logout</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
 	);

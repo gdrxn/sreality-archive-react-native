@@ -1,6 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import searchHistorySlice from "./Stores/searchHistorySlice";
-import authSlice from "./Stores/authSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
 	persistReducer,
 	FLUSH,
@@ -10,7 +9,9 @@ import {
 	PURGE,
 	REGISTER,
 } from "redux-persist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import authSlice from "./Stores/authSlice";
+import favouritesSlice from "./Stores/favouritesSlice";
 
 const persistConfig = {
 	key: "root",
@@ -19,8 +20,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-	searches: searchHistorySlice,
 	auth: authSlice,
+	favourites: favouritesSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

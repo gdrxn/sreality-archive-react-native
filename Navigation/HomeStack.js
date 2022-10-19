@@ -3,7 +3,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import HomeScreen from "../Screens/HomeScreen";
 import SettingsScreen from "../Screens/SettingsScreen";
-import SearchScreen from "../Screens/SearchScreen";
+import FavouritesScreen from "../Screens/FavouritesScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +16,8 @@ export default function HomeStack() {
 
 					if (route.name === "Home") {
 						iconName = focused ? "home" : "home-outline";
-					} else if (route.name === "Search") {
-						iconName = focused ? "search" : "search-outline";
+					} else if (route.name === "Favourites") {
+						iconName = focused ? "heart" : "heart-outline";
 					} else if (route.name === "Settings") {
 						iconName = focused ? "settings" : "settings-outline";
 					}
@@ -33,7 +33,7 @@ export default function HomeStack() {
 			})}
 		>
 			<Tab.Screen name="Home" component={HomeScreen} />
-			<Tab.Screen name="Search" component={SearchScreen} />
+			<Tab.Screen name="Favourites" component={FavouritesScreen} />
 			<Tab.Screen name="Settings" component={SettingsScreen} />
 		</Tab.Navigator>
 	);
