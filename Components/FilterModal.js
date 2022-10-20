@@ -12,11 +12,19 @@ const FilterModal = ({
 	modalVisible,
 	setModalVisible,
 	sortType,
-	setSortType,
-	updated,
-	page,
+	saveSortType,
 }) => {
 	const [originalValue, setOriginalValue] = useState(sortType);
+
+	function save() {
+		setOriginalValue(originalValue);
+		saveSortType(originalValue);
+	}
+
+	function goBack() {
+		setOriginalValue(sortType);
+		setModalVisible(false);
+	}
 
 	return (
 		<Modal
@@ -30,8 +38,7 @@ const FilterModal = ({
 				<View className="flex-row justify-between mt-4">
 					<TouchableOpacity
 						onPress={() => {
-							setOriginalValue(sortType);
-							setModalVisible(false);
+							goBack();
 						}}
 					>
 						<Text className="text-xl ml-4">Back</Text>
@@ -39,26 +46,25 @@ const FilterModal = ({
 
 					<TouchableOpacity
 						onPress={() => {
-							setOriginalValue(originalValue);
-							setSortType(originalValue);
-							setModalVisible(false);
-							page.current = 1;
-							updated.current++;
+							save();
 						}}
 					>
 						<Text className="text-xl mr-4">Save</Text>
 					</TouchableOpacity>
 				</View>
-				<View className="w-11/12 self-center mt-7 border-gray-100 border">
-					<Picker
-						selectedValue={originalValue}
-						onValueChange={(itemValue) => setOriginalValue(itemValue)}
-					>
-						<Picker.Item label="Newest" value="date-asc" />
-						<Picker.Item label="Oldest" value="date-desc" />
-						<Picker.Item label="Price Ascending" value="price-asc" />
-						<Picker.Item label="Price Descending" value="price-desc" />
-					</Picker>
+				<View className="mt-7 space-y-2">
+					<Text className="ml-5 text-lg font-medium">Sort</Text>
+					<View className="w-11/12 self-center  border-gray-100 border">
+						<Picker
+							selectedValue={originalValue}
+							onValueChange={(itemValue) => setOriginalValue(itemValue)}
+						>
+							<Picker.Item label="Newest" value="date-asc" />
+							<Picker.Item label="Oldest" value="date-desc" />
+							<Picker.Item label="Lowest price" value="price-asc" />
+							<Picker.Item label="Highest price" value="price-desc" />
+						</Picker>
+					</View>
 				</View>
 			</SafeAreaView>
 		</Modal>

@@ -22,14 +22,14 @@ const HomeScreen = () => {
 	const navigation = useNavigation();
 
 	const [products, setProducts] = useState([]);
-
-	const [modalVisible, setModalVisible] = useState(false);
-	const [sortType, setSortType] = useState("date-asc");
+	const [sortType, setSortType] = useState("date-desc");
 	const [searchTerm, setSearchTerm] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
+	const [modalVisible, setModalVisible] = useState(false);
+
 	const page = useRef(1);
 	const productsLength = useRef(null);
 	const updated = useRef(0);
-	const [isLoading, setIsLoading] = useState(true);
 
 	function getProducts() {
 		if (products.length === productsLength.current) return;
@@ -40,24 +40,53 @@ const HomeScreen = () => {
 
 		axios({
 			method: "get",
-			url: `${host}/api/user/products?limit=9&page=${page.current}&term=${searchTerm}&sort=${sortType}`,
+			url: `${host}/api/user/products?limit=20&page=${page.current}&term=${searchTerm}&sort=${sortType}`,
 			withCredentials: true,
 		})
 			.then((res) => {
 				productsLength.current = res.data.productsLength;
-
-				if (page.current === 1) {
-					setProducts(res.data.currentProducts);
-				} else {
-					setProducts([...products, ...res.data.currentProducts]);
-				}
-
+				setProducts((current) => [...current, ...res.data.currentProducts]);
 				setIsLoading(false);
 				page.current++;
 			})
 			.catch((err) => {
 				console.log(err);
 			});
+	}
+
+	function search() {
+		setIsLoading(true);
+
+		setSortType("date-desc");
+		setProducts([]);
+		productsLength.current = null;
+		page.current = 1;
+
+		updated.current++;
+	}
+
+	function closeSearch() {
+		setIsLoading(true);
+
+		setSearchTerm("");
+		setSortType("date-desc");
+		setProducts([]);
+		productsLength.current = null;
+		page.current = 1;
+
+		updated.current++;
+	}
+
+	function saveSortType(type) {
+		setModalVisible(false);
+		setIsLoading(true);
+
+		setSortType(type);
+		setProducts([]);
+		productsLength.current = null;
+		page.current = 1;
+
+		updated.current++;
 	}
 
 	useEffect(() => {
@@ -71,9 +100,7 @@ const HomeScreen = () => {
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 				sortType={sortType}
-				setSortType={setSortType}
-				updated={updated}
-				page={page}
+				saveSortType={saveSortType}
 			/>
 			<View className="flex-row justify-evenly mt-3">
 				<View className="flex-row items-center justify-between bg-gray-100 rounded-xl border border-gray-200 w-9/12">
@@ -87,22 +114,15 @@ const HomeScreen = () => {
 							value={searchTerm}
 							placeholder="Search"
 							onSubmitEditing={() => {
-								page.current = 1;
-								setIsLoading(true);
-								getProducts();
+								search();
 							}}
 						/>
 					</View>
 					{searchTerm && (
 						<TouchableOpacity
-							className="pr-1.5 "
+							className="pr-1.5"
 							onPress={() => {
-								setSearchTerm("");
-								setSortType("date-asc");
-								page.current = 1;
-								productsLength.current = null;
-								setIsLoading(true);
-								updated.current++;
+								closeSearch();
 							}}
 						>
 							<Ionicons name="close-outline" size={24} color="black" />
