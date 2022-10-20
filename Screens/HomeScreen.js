@@ -25,6 +25,7 @@ const HomeScreen = () => {
 	const [sortType, setSortType] = useState("date-desc");
 	const [searchTerm, setSearchTerm] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
+	const [isPending, setIsPending] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const page = useRef(1);
@@ -32,11 +33,14 @@ const HomeScreen = () => {
 	const updated = useRef(0);
 
 	function getProducts() {
-		if (products.length === productsLength.current) return;
+		if (products.length === productsLength.current || isPending) return;
+
 		const host =
 			Platform.OS === "android"
 				? "http://10.0.2.2:3000"
 				: "http://127.0.0.1:3000";
+
+		setIsPending(true);
 
 		axios({
 			method: "get",
@@ -47,6 +51,7 @@ const HomeScreen = () => {
 				productsLength.current = res.data.productsLength;
 				setProducts((current) => [...current, ...res.data.currentProducts]);
 				setIsLoading(false);
+				setIsPending(false);
 				page.current++;
 			})
 			.catch((err) => {
@@ -155,6 +160,9 @@ const HomeScreen = () => {
 						>
 							<Text className="text-center text-base">{item.name}</Text>
 							<Text className="text-center text-base">{item.location}</Text>
+							<Text className="text-center text-base">
+								{item.price && `${item.price} Kč`}
+							</Text>
 						</TouchableOpacity>
 					)}
 					keyExtractor={(item) => item._id}
