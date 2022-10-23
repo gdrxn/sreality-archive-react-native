@@ -30,7 +30,6 @@ const HomeScreen = () => {
 
 	const page = useRef(1);
 	const productsLength = useRef(null);
-	const updated = useRef(0);
 
 	function getProducts() {
 		if (products.length === productsLength.current || isPending) return;
@@ -66,8 +65,6 @@ const HomeScreen = () => {
 		setProducts([]);
 		productsLength.current = null;
 		page.current = 1;
-
-		updated.current++;
 	}
 
 	function closeSearch() {
@@ -78,8 +75,6 @@ const HomeScreen = () => {
 		setProducts([]);
 		productsLength.current = null;
 		page.current = 1;
-
-		updated.current++;
 	}
 
 	function saveSortType(type) {
@@ -90,13 +85,11 @@ const HomeScreen = () => {
 		setProducts([]);
 		productsLength.current = null;
 		page.current = 1;
-
-		updated.current++;
 	}
 
 	useEffect(() => {
 		getProducts();
-	}, [updated.current]);
+	}, [isLoading]);
 
 	return (
 		<SafeAreaView className="bg-white flex-1">
