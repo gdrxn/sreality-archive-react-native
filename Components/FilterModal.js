@@ -59,8 +59,8 @@ const FilterModal = ({
 							selectedValue={originalValue}
 							onValueChange={(itemValue) => setOriginalValue(itemValue)}
 						>
-							<Picker.Item label="Newest" value="date-asc" />
-							<Picker.Item label="Oldest" value="date-desc" />
+							<Picker.Item label="Newest" value="date-desc" />
+							<Picker.Item label="Oldest" value="date-asc" />
 							<Picker.Item label="Lowest price" value="price-asc" />
 							<Picker.Item label="Highest price" value="price-desc" />
 						</Picker>
