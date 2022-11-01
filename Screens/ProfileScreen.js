@@ -1,5 +1,6 @@
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuth, unsetUser } from "../Stores/authSlice";
@@ -10,13 +11,15 @@ const ProfileScreen = () => {
 
 	return (
 		<SafeAreaView className="flex-1 bg-white">
+			<Text className="self-center text-lg font-medium mt-2">Favourites</Text>
+
 			<TouchableOpacity
-				className="mt-5 mr-5 self-end"
+				className="absolute top-3 right-3"
 				onPress={() => {
 					dispatch(unsetUser());
 				}}
 			>
-				<Text className="text-lg">Logout</Text>
+				<Ionicons name="exit-outline" size={30} color="black" />
 			</TouchableOpacity>
 			<View className="items-center mt-10">
 				<MaterialCommunityIcons

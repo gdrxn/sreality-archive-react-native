@@ -47,23 +47,23 @@ const LoginScreen = () => {
 	}
 
 	return (
-		<SafeAreaView className="flex-1 items-center justify-center ">
-			<View className="border border-gray-200 rounded-lg w-1/2 px-5 py-8">
-				<Text className="text-center text-xl mb-4">Welcome!</Text>
+		<SafeAreaView className="flex-1 items-center justify-center bg-white">
+			<View className="border border-neutral-100 rounded-lg w-64 px-5 pt-8 pb-14">
+				<Text className="text-center text-2xl mb-6">Welcome!</Text>
 				<TextInput
-					className="border-2 border-gray-200  rounded-lg pl-2.5 text-lg py-0.5"
+					className="border border-neutral-200 rounded-lg pl-2.5 text-lg py-0.5"
 					placeholder="Email"
 					onChangeText={setEmail}
 					value={email}
 				/>
 				<TextInput
-					className="border-2 border-gray-200 rounded-lg pl-2.5 text-lg py-0.5 mt-4"
+					className="border border-neutral-200 rounded-lg pl-2.5 text-lg py-0.5 mt-4"
 					placeholder="Password"
 					onChangeText={setPassword}
 					value={password}
 				/>
 				<TouchableOpacity onPress={login}>
-					<Text className="text-center text-lg mt-5 bg-blue-400 rounded-xl py-1">
+					<Text className="text-center text-lg mt-8 bg-blue-500 rounded-full py-1">
 						Log in
 					</Text>
 				</TouchableOpacity>
