@@ -11,7 +11,7 @@ import {
 	StatusBar,
 	Platform,
 } from "react-native";
-import axios from "axios";
+import axiosInstance from "../axiosInterceptor";
 
 import { Octicons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -41,11 +41,10 @@ const HomeScreen = () => {
 
 		setIsPending(true);
 
-		axios({
-			method: "get",
-			url: `${host}/api/user/products?limit=20&page=${page.current}&term=${searchTerm}&sort=${sortType}`,
-			withCredentials: true,
-		})
+		axiosInstance
+			.get(
+				`${host}/api/user/products?limit=20&page=${page.current}&term=${searchTerm}&sort=${sortType}`
+			)
 			.then((res) => {
 				productsLength.current = res.data.productsLength;
 				setProducts((current) => [...current, ...res.data.currentProducts]);

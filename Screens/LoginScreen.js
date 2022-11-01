@@ -7,9 +7,9 @@ import {
 	Platform,
 } from "react-native";
 import { useState } from "react";
-import axios from "axios";
 import { setUser } from "../Stores/authSlice";
 import { useDispatch } from "react-redux";
+import axiosInstance from "../axiosInterceptor";
 
 const LoginScreen = () => {
 	const dispatch = useDispatch();
@@ -22,19 +22,20 @@ const LoginScreen = () => {
 			: "http://127.0.0.1:3000";
 
 	function login() {
-		axios({
-			method: "post",
-			url: `${host}/api/auth/login`,
-			data: {
-				email: email,
-				password: password,
-			},
-			headers: {
-				"Content-Type": "application/json",
-				"Accept": "application/json",
-			},
-			withCredentials: true,
-		})
+		axiosInstance
+			.post(
+				`${host}/api/auth/login`,
+				{
+					email: email,
+					password: password,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+					},
+				}
+			)
 			.then((res) => {
 				if (res.status == 200) {
 					dispatch(setUser(res.data));
